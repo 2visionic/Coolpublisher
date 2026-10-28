@@ -1,0 +1,40 @@
+{
+  "projectName": "Ukázkový Projekt (React + PHP API)",
+  "version": "1.0.0",
+  "builtAt": "2026-10-28T11:00:00.000Z",
+  "readyForUpload": true,
+  "buildCommand": "node scripts/coolpublisher-build.mjs",
+  "ftp": {
+    "host": "ftpupload.net",
+    "port": 21,
+    "user": "if0_37xxxxxx",
+    "secure": true,
+    "rejectUnauthorized": false
+  },
+  "mappings": [
+    {
+      "name": "Frontend - Web (React Build)",
+      "type": "react-web",
+      "localPath": "./frontend-web/dist",
+      "remotePath": "/htdocs",
+      "enabled": true,
+      "exclude": ["*.map"]
+    },
+    {
+      "name": "Frontend - Backoffice (React Build)",
+      "type": "react-backoffice",
+      "localPath": "./frontend-backoffice/dist",
+      "remotePath": "/htdocs/backoffice",
+      "enabled": true,
+      "exclude": ["*.map"]
+    },
+    {
+      "name": "Backend - REST API (PHP)",
+      "type": "php-api",
+      "localPath": "./backend-api",
+      "remotePath": "/htdocs/api",
+      "enabled": true,
+      "exclude": [".env.local", ".git/**", "tests/**"]
+    }
+  ]
+}

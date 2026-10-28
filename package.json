@@ -1,0 +1,97 @@
+{
+  "name": "coolpublisher",
+  "displayName": "CoolPublisher - FTP Build Publisher",
+  "description": "Univerzální FTP publisher pro React (Web + Backoffice) a PHP REST API řízený přes build manifest JSON (optimalizováno i pro InfinityFree).",
+  "version": "1.0.0",
+  "publisher": "2visionic",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2visionic/Coolpublisher.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "SCM Providers"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:**/coolpublisher.json",
+    "workspaceContains:**/publish-manifest.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "coolpublisher-sidebar",
+          "title": "CoolPublisher (FTP Upload)",
+          "icon": "resources/coolpublisher-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "coolpublisher-sidebar": [
+        {
+          "type": "webview",
+          "id": "coolpublisher.panelView",
+          "name": "Build & FTP Publish"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "coolpublisher.refresh",
+        "title": "CoolPublisher: Obnovit stav buildu",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "coolpublisher.initManifest",
+        "title": "CoolPublisher: Vytvořit coolpublisher.json a build skript",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "coolpublisher.publishAll",
+        "title": "CoolPublisher: Nahrát připravený build na FTP",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "coolpublisher.openOutput",
+        "title": "CoolPublisher: Zobrazit FTP log",
+        "icon": "$(output)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "coolpublisher.refresh",
+          "when": "view == coolpublisher.panelView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "coolpublisher.openOutput",
+          "when": "view == coolpublisher.panelView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "coolpublisher.initManifest",
+          "when": "view == coolpublisher.panelView",
+          "group": "navigation@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "npx @vscode/vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.3.3"
+  }
+}
